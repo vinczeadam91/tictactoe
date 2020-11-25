@@ -63,18 +63,11 @@ const checkRowValues = (arr) => {
 // TODO: Meg kell írnod, boolean adjon vissza
 const checkColumnValues = () =>
 checkRowValues(matrix.map((arr, row) => arr.map((rows,cell) => matrix[cell][row])))
-  
-
-    
-    
-   
-    
- 
 
 // Megnézem hogy van e olyan oszlop, ahol minden elem ugyanaz
 // TODO: Meg kell írnod, boolean adjon vissza
 const checkDiagonalValues = () => 
-checkValues([
+checkRowValues([
     matrix.map((arr, i) => matrix[i][i]),
     matrix.map((arr, i) => matrix[i][matrix[i.length - i]])
 ])
@@ -84,10 +77,12 @@ checkValues([
 
 // TODO: Meg kell írnod, nincs befejezve
 const checkWinner = () => {
-    // Akár a checkRowValues, checkColumnValues, checkDiagonalValues true, akkor van győztes
-    // Csak azért van itt a log hogy lássátok hogy true akkor lesz ha van olyan sor ahol minden elem ugyanaz
-    console.log(checkRowValues(matrix));
-    console.log(checkColumnValues());
+   
+    if (checkRowValues(matrix) || checkColumnValues() || checkDiagonalValues()) {
+        alert('The winner is: ' + (mark === 'X' ? 'O' : 'X'));
+    removeAllClickListener();
+    }
+    
 }
 
 initState();
