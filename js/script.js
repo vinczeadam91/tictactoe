@@ -52,8 +52,8 @@ const removeListener = () => {
 }
 
 // Megnézem hogy van e olyan sor, ahol minden elem ugyanaz
-const checkRowValues = () => {
-    const values = matrix.map(row =>
+const checkRowValues = (arr) => {
+    const values = arr.map(row =>
         row.every((value) => value === 'X') ||
         row.every((value) => value === 'O'))
     return values.indexOf(true) !== -1 ? true : false;
@@ -61,10 +61,10 @@ const checkRowValues = () => {
 
 // Megnézem hogy van e olyan oszlop, ahol minden elem ugyanaz
 // TODO: Meg kell írnod, boolean adjon vissza
-const checkColumnValues = () => {}
+const checkColumnValues = () =>
+checkRowValues(matrix.map((arr, row) => arr.map((rows,cell) => matrix[cell][row])))
+  
 
-       
-    
     
     
    
@@ -73,14 +73,20 @@ const checkColumnValues = () => {}
 
 // Megnézem hogy van e olyan oszlop, ahol minden elem ugyanaz
 // TODO: Meg kell írnod, boolean adjon vissza
-const checkDiagonalValues = () => { }
+const checkDiagonalValues = () => 
+checkValues([
+    matrix.map((arr, i) => matrix[i][i]),
+    matrix.map((arr, i) => matrix[i][matrix[i.length - i]])
+])
+    
+ 
 
 
 // TODO: Meg kell írnod, nincs befejezve
 const checkWinner = () => {
     // Akár a checkRowValues, checkColumnValues, checkDiagonalValues true, akkor van győztes
     // Csak azért van itt a log hogy lássátok hogy true akkor lesz ha van olyan sor ahol minden elem ugyanaz
-    // console.log(checkRowValues());
+    console.log(checkRowValues(matrix));
     console.log(checkColumnValues());
 }
 
